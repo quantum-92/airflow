@@ -1,7 +1,3 @@
-venv
-<<<<<<< HEAD
+venv/
 .env
-=======
-logs
-plugins
->>>>>>> e33603628d5480c90072719c8f8ac39123852a5a
+logs/
