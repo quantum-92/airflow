@@ -11,8 +11,8 @@ with DAG(
 ) as dag:
     
     @task(task_id = "task_using_macro",
-          templates_dict = {'start_date': '{{(data_interval_start.in_timezone("Asia/Seoul") + macros.dateutlils.relativedelta.relativedelta(months = -1, day = 1)) | ds}}',
-                           'end_date': '{{data_interval_end.in_timezone("Asia/Seoul") + macros.dateutlils.relativedelta.relativedelta(days = -1)) | ds}}'})
+          templates_dict = {'start_date': '{{(data_interval_start.in_timezone("Asia/Seoul") + macros.dateutlil.relativedelta.relativedelta(months = -1, day = 1)) | ds}}',
+                           'end_date': '{{data_interval_end.in_timezone("Asia/Seoul") + macros.dateutlil.relativedelta.relativedelta(days = -1)) | ds}}'})
     def get_datetime_macro(**kwargs):
         templates_dict = kwargs['template_dict'] or {}
         start_date = templates_dict['start_date'] or "no start_date"
