@@ -11,6 +11,7 @@ with DAG(
     tags=["example", "example2"]
 ) as dag:
     
+    
     @task(task_id = "task_using_macro",
           template_dict = {'start_date': '{{(data_interval_start.to_timezone("Asia/Seoul") + macros.datetimeutlils.relativedelta.relativedelta(months = -1, day = 1)) | ds}}',
                            'end_date': '{{data_interval_end.to_timezone("Asia/Seoul") + macros.datetimeutlils.relativedelta.relativedelta(days = -1)) | ds}}'})
