@@ -11,8 +11,8 @@ with DAG(
 ) as dag:
     
     @task(task_id = "task_using_macro",
-          templates_dict = {'start_date': '{{(data_interval_start.to_timezone("Asia/Seoul") + macros.datetimeutlils.relativedelta.relativedelta(months = -1, day = 1)) | ds}}',
-                           'end_date': '{{data_interval_end.to_timezone("Asia/Seoul") + macros.datetimeutlils.relativedelta.relativedelta(days = -1)) | ds}}'})
+          templates_dict = {'start_date': '{{(data_interval_start.in_timezone("Asia/Seoul") + macros.datetimeutlils.relativedelta.relativedelta(months = -1, day = 1)) | ds}}',
+                           'end_date': '{{data_interval_end.in_timezone("Asia/Seoul") + macros.datetimeutlils.relativedelta.relativedelta(days = -1)) | ds}}'})
     def get_datetime_macro(**kwargs):
         templates_dict = kwargs['template_dict'] or {}
         start_date = templates_dict['start_date'] or "no start_date"
@@ -24,9 +24,9 @@ with DAG(
     def get_datetime_direct(**kwargs):
         from dateutil.relativedelta import relativedelta
         
-        date_time_interval_end = kwargs['date_interval_end'].to_timzone("Asia/Seoul")
-        start_date = date_time_interval_end + relativedelta(months = -1, day = 1)
-        end_date = date_time_interval_end + relativedelta(days = -1)
+        data_interval_end = kwargs['data_interval_end'].in_timzone("Asia/Seoul")
+        start_date = data_interval_end + relativedelta(months = -1, day = 1)
+        end_date = data_interval_end + relativedelta(day = 1) + relativedelta(months = -1)
         print(start_date.strftime("%Y-%m-%d"))
         print(end_date.strftime("%Y-%m-%d"))
         
