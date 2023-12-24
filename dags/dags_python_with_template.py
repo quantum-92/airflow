@@ -1,6 +1,7 @@
 import datetime
 import pendulum
 from airflow import DAG
+from airflow.operators.python import PythonOperator
 from airflow.decorators import task
 
 with DAG(
@@ -24,7 +25,7 @@ with DAG(
     
     @task(task_id = "python_t2")
     def python_func2(*kwargs):    
-        print(kwargs)
+        print(kwargs)wit
         print('ds:', kwargs['ds'])
         print('ts: ', kwargs['ts'])
         print('ds_interval_start: ', str(kwargs['data_interval_start']))
